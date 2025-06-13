@@ -84,18 +84,18 @@ final class AzureBlobStorageAdapter implements FilesystemAdapter, ChecksumProvid
 
     public function write(string $path, string $contents, Config $config): void
     {
-        $this->upload($path, $contents);
+        $this->upload($path, $contents, $config);
     }
 
     public function writeStream(string $path, $contents, Config $config): void
     {
-        $this->upload($path, $contents);
+        $this->upload($path, $contents, $config);
     }
 
     /**
      * @param string|resource $contents
      */
-    private function upload(string $path, $contents): void
+    private function upload(string $path, $contents, Config $config): void
     {
         try {
             $path = $this->prefixer->prefixPath($path);
@@ -103,6 +103,10 @@ final class AzureBlobStorageAdapter implements FilesystemAdapter, ChecksumProvid
 
             $options = new UploadBlobOptions(
                 contentType: $mimetype,
+                cacheControl: $config->get('cacheControl'),
+                contentEncoding: $config->get('contentEncoding'),
+                contentLanguage: $config->get('contentLanguage'),
+                contentDisposition: $config->get('contentDisposition'),
             );
 
             $this->containerClient
