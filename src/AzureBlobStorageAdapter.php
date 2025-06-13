@@ -103,10 +103,10 @@ final class AzureBlobStorageAdapter implements FilesystemAdapter, ChecksumProvid
 
             $options = new UploadBlobOptions(
                 contentType: $mimetype,
-                cacheControl: $config->get('cacheControl'),
-                contentEncoding: $config->get('contentEncoding'),
-                contentLanguage: $config->get('contentLanguage'),
-                contentDisposition: $config->get('contentDisposition'),
+                cacheControl: $config->get('CacheControl'),
+                contentEncoding: $config->get('ContentEncoding'),
+                contentLanguage: $config->get('ContentLanguage'),
+                contentDisposition: $config->get('ContentDisposition'),
             );
 
             $this->containerClient
